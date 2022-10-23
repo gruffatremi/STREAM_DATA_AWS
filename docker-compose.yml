@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  api:
+    image: 127.0.0.1:5000/api-docker:latest
+    build: .
+    deploy:
+      placement:
+        constraints: [node.role==worker]
+      restart_policy:
+        condition: any
+  reactive:
+    image: 127.0.0.1:5000/reactive-streaming-docker:latest
+    build: .
+    deploy:
+      placement:
+        constraints: [node.role==worker]
+      restart_policy:
+        condition: any
+
+  mosquitto:
+    image: 127.0.0.1:5000/eclipse-mosquitto-docker:latest
+    build: .
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    deploy:
+      endpoint_mode: vip
+      placement:
+        constraints: [node.role==worker]
+      restart_policy:
+        condition: any
