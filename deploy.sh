@@ -34,8 +34,7 @@ deploy_app () {
 }
 if [ $# -lt 1 ]
 then
-echo "mettre en paramètre 1, 2 ou 3 (max 3 agr)"
-exit 0
+echo "Deploiement de l'applicatif pour la premiere fois ou update"
 fi
 if [ $# -gt 3 ]
 then
